@@ -3,6 +3,8 @@ package com.example.kamil.postsapp.network;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
+
 import java.util.List;
 
 
@@ -12,16 +14,16 @@ import com.example.kamil.postsapp.model.User;
 
 public interface ApiClient {
 
-    //https://jsonplaceholder.typicode.com/posts
     @GET("/posts")
     Observable<List<Post>> getAllPosts();
 
-    //https://jsonplaceholder.typicode.com/users/2
-    @GET("/users/{UserId}")
-    Observable<User> getUser(int userId);
+    @GET("/users/{userId}")
+    Observable<User> getUser(@Path("userId") String userId);
 
-    //https://jsonplaceholder.typicode.com/posts/1/comments
     @GET("/posts/{postId}/comments")
-    Observable<List<Comment>> getCommentsForPost(int postId);
+    Observable<List<Comment>> getCommentsForPost(@Path("postId") String postId);
+
+    @GET("/posts/{postId}")
+    Observable<Post> getPost(@Path("postId") String postId);
 
 }

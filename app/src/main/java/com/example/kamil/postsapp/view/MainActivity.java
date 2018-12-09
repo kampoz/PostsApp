@@ -1,4 +1,4 @@
-package com.example.kamil.postsapp;
+package com.example.kamil.postsapp.view;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
+import com.example.kamil.postsapp.R;
 import com.example.kamil.postsapp.adapter.PostsAdapter;
 import com.example.kamil.postsapp.databinding.ActivityMainBinding;
 import com.example.kamil.postsapp.model.Post;
@@ -21,11 +21,8 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PostsAdapter.Listener {
 
     private static final String TAG = "TAG1";
     private List<Post> posts = new ArrayList<>();
@@ -52,11 +49,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-//         ustawiamy animatora, który odpowiada za animację dodania/usunięcia elementów listy
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());      ???
-
-
         disposable = apiManager.getAllPosts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -64,11 +56,24 @@ public class MainActivity extends AppCompatActivity {
                     List<Post> posts = new ArrayList<>();
                     posts.addAll(response);
                     postsViewModel.getPosts().setValue(posts);
-//                    postsViewModel.getPosts().getValue().addAll(posts);
 
-                    recyclerView.setAdapter(new PostsAdapter(postsViewModel.getPosts().getValue(), recyclerView));
+                    recyclerView.setAdapter(new PostsAdapter(postsViewModel.getPosts().getValue(), recyclerView, this));
                     disposable.dispose();
                 });
+    }
+
+    @Override
+    public void onItemClick(String postId) {
+        openPostFagment(postId);
+    }
+
+    private void openPostFagment(String postId) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fl_container, PostFragment.newInstance(postId), null)
+                .addToBackStack(null)
+                .commit();
+
     }
 }
 
