@@ -1,4 +1,4 @@
-package com.example.kamil.postsapp.view;
+package com.example.kamil.postsapp.newVersion.view;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -16,8 +16,8 @@ import com.example.kamil.postsapp.R;
 import com.example.kamil.postsapp.model.Comment;
 import com.example.kamil.postsapp.model.Post;
 import com.example.kamil.postsapp.model.User;
+import com.example.kamil.postsapp.oldVersion.viewmodel.UserViewModel;
 import com.example.kamil.postsapp.remote.ApiManager;
-import com.example.kamil.postsapp.viewmodel.UserViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class PostFragment extends Fragment {
+public class PostFragment2 extends Fragment {
 
     private UserViewModel mViewModel;
     private String postId;
@@ -36,8 +36,8 @@ public class PostFragment extends Fragment {
     private RecyclerView recyclerView;
     private List<Comment> comments = new ArrayList<>();
 
-    public static PostFragment newInstance(String postId) {
-        PostFragment userFragment = new PostFragment();
+    public static PostFragment2 newInstance(String postId) {
+        PostFragment2 userFragment = new PostFragment2();
         userFragment.postId = postId;
         return userFragment;
     }
@@ -52,14 +52,13 @@ public class PostFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+//        mViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
         getPostObservable(postId)
                 .map(post -> getUserObservable(post.getUserId())

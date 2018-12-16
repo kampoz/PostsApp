@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.kamil.postsapp.model.Post;
-import com.example.kamil.postsapp.viewmodel.PostViewModel;
+import com.example.kamil.postsapp.newVersion.viewmodel.PostViewModel;
 
 import java.util.ArrayList;
 
@@ -22,14 +22,31 @@ public class Repository {
         disposable = apiManager.getAllPosts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(response -> {
+                .subscribe(postsList -> {
                     ArrayList<PostViewModel> responseListPostViewModel = new ArrayList<>();
-                    for (Post post : response) {
+                    for (Post post : postsList) {
                         responseListPostViewModel.add(new PostViewModel(post));
                     }
-                    postViewModel.getArrayListMutableLiveData().setValue(responseListPostViewModel);
+                    postViewModel.getPostsArrayListMutableLiveData().setValue(responseListPostViewModel);
                     disposable.dispose();
-                }, Throwable::printStackTrace);
+                }, error -> {
+                    error.printStackTrace();
+                    disposable.dispose();
+                });
+    }
+
+    public void getSinglePostById(AppCompatActivity context, String postId) {
+        postViewModel = ViewModelProviders.of(context).get(PostViewModel.class);
+        disposable = apiManager.getPost(postId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(post -> {
+                    postViewModel.getPostMutableLiveData().setValue(new PostViewModel(post));
+                    disposable.dispose();
+                }, error -> {
+                    error.printStackTrace();
+                    disposable.dispose();
+                });
     }
 }
 

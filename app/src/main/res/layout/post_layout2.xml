@@ -6,7 +6,7 @@
 
         <variable
             name="postviewmodel"
-            type="com.example.kamil.postsapp.viewmodel.PostViewModel" />
+            type="com.example.kamil.postsapp.newVersion.viewmodel.PostViewModel" />
 
     </data>
 

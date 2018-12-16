@@ -2,12 +2,12 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.MainActivity">
+    tools:context=".oldVersion.view.MainActivity">
 
     <data>
         <variable
             name="viewmodel"
-            type="com.example.kamil.postsapp.viewmodel.PostsViewModel" />
+            type="com.example.kamil.postsapp.oldVersion.viewmodel.PostsViewModel" />
     </data>
 
     <FrameLayout

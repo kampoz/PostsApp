@@ -1,4 +1,4 @@
-package com.example.kamil.postsapp.view;
+package com.example.kamil.postsapp.newVersion.view;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -8,24 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.example.kamil.postsapp.R;
-import com.example.kamil.postsapp.adapter.Adapter1;
 import com.example.kamil.postsapp.adapter.Adapter2;
-import com.example.kamil.postsapp.model.Post;
-import com.example.kamil.postsapp.remote.ApiManager;
 import com.example.kamil.postsapp.remote.Repository;
-import com.example.kamil.postsapp.viewmodel.PostViewModel;
+import com.example.kamil.postsapp.newVersion.viewmodel.PostViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-
-public class Main2Activity extends AppCompatActivity {
+public class Main2Activity extends AppCompatActivity implements Adapter2.Listener {
     private PostViewModel postViewModel;
     private RecyclerView recyclerView;
     private Adapter2 adapter2;
@@ -42,7 +33,7 @@ public class Main2Activity extends AppCompatActivity {
         postViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
         fab = findViewById(R.id.floatingActionButton);
 
-        postViewModel.getArrayListMutableLiveData().observe(this, new Observer<ArrayList<PostViewModel>>() {
+        postViewModel.getPostsArrayListMutableLiveData().observe(this, new Observer<ArrayList<PostViewModel>>() {
             @Override
             public void onChanged(@Nullable ArrayList<PostViewModel> postViewModels) {
                 adapter2 = new Adapter2(Main2Activity.this, postViewModels);
@@ -56,5 +47,19 @@ public class Main2Activity extends AppCompatActivity {
 
     private void requestForAllPosts() {
         repository.getAllPosts(this);
+    }
+
+    @Override
+    public void onItemClick(String postId) {
+        openPostFragment(postId);
+    }
+
+    private void openPostFragment(String postId) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fl_container, PostFragment2.newInstance(postId), null)
+                .addToBackStack(null)
+                .commit();
+
     }
 }

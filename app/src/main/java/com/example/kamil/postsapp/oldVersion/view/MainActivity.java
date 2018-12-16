@@ -1,4 +1,4 @@
-package com.example.kamil.postsapp.view;
+package com.example.kamil.postsapp.oldVersion.view;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
@@ -12,7 +12,7 @@ import com.example.kamil.postsapp.R;
 import com.example.kamil.postsapp.adapter.Adapter1;
 import com.example.kamil.postsapp.model.Post;
 import com.example.kamil.postsapp.remote.ApiManager;
-import com.example.kamil.postsapp.viewmodel.PostsViewModel;
+import com.example.kamil.postsapp.oldVersion.viewmodel.PostsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

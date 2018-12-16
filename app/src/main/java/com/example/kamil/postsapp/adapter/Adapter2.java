@@ -10,23 +10,23 @@ import android.view.ViewGroup;
 
 import com.example.kamil.postsapp.R;
 import com.example.kamil.postsapp.databinding.PostBinding2;
-import com.example.kamil.postsapp.viewmodel.PostViewModel;
+import com.example.kamil.postsapp.newVersion.viewmodel.PostViewModel;
 
 import java.util.ArrayList;
 
 public class Adapter2 extends RecyclerView.Adapter<Adapter2.PostViewHolder> {
 
-    private ArrayList<PostViewModel> arrayList;
+    private ArrayList<PostViewModel> postViewModelsArrayList;
     private Context context;
     private LayoutInflater layoutInflater;
 
-    public Adapter2(Context context, ArrayList<PostViewModel> arrayList) {
+    public Adapter2(Context context, ArrayList<PostViewModel> postViewModelsArrayList) {
         this.context = context;
-        this.arrayList = arrayList;
+        this.postViewModelsArrayList = postViewModelsArrayList;
     }
 
-    public void setArrayList(ArrayList<PostViewModel> arrayList) {
-        this.arrayList = arrayList;
+    public void setPostViewModelsArrayList(ArrayList<PostViewModel> postViewModelsArrayList) {
+        this.postViewModelsArrayList = postViewModelsArrayList;
     }
 
     class PostViewHolder extends RecyclerView.ViewHolder {
@@ -51,22 +51,33 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.PostViewHolder> {
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(viewGroup.getContext());
         }
+
         PostBinding2 postBinding2 = DataBindingUtil.inflate(layoutInflater, R.layout.post_layout2, viewGroup, false);
+        postBinding2.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                listener.onItemClick(postViewModelsArrayList.get(i).getUserId());
+            }
+        });
+
         return new PostViewHolder(postBinding2);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder postViewHolder, int i) {
-        PostViewModel postsViewModel = arrayList.get(i);
+        PostViewModel postsViewModel = postViewModelsArrayList.get(i);
         postViewHolder.bind(postsViewModel);
     }
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return postViewModelsArrayList.size();
+    }
+
+    public interface Listener{
+        void onItemClick(String userid);
     }
 }

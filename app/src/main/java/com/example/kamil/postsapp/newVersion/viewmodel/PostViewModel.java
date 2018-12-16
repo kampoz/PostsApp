@@ -1,4 +1,4 @@
-package com.example.kamil.postsapp.viewmodel;
+package com.example.kamil.postsapp.newVersion.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
@@ -13,8 +13,10 @@ public class PostViewModel extends ViewModel {
     private String title;
     private String userId;
 
-    public static MutableLiveData<ArrayList<PostViewModel>> arrayListMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<ArrayList<PostViewModel>> arrayListMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<PostViewModel> postMutableLiveData = new MutableLiveData<>();
 
+    /** Pusty konstruktor wymagany przy tworzeniu instancji przez ViewModelProviders.of...*/
     public PostViewModel() {
     }
 
@@ -25,13 +27,16 @@ public class PostViewModel extends ViewModel {
         this.userId = post.getUserId();
     }
 
-    public void setUserId (String userId)
-    {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public MutableLiveData<ArrayList<PostViewModel>> getArrayListMutableLiveData() {
+    public MutableLiveData<ArrayList<PostViewModel>> getPostsArrayListMutableLiveData() {
         return arrayListMutableLiveData;
+    }
+
+    public MutableLiveData<PostViewModel> getPostMutableLiveData() {
+        return postMutableLiveData;
     }
 
     public String getId() {

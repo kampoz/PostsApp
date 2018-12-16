@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/myGray"
-    tools:context=".view.PostFragment">
+    tools:context=".oldVersion.view.PostFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

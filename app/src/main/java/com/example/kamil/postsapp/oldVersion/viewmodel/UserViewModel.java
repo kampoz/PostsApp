@@ -1,4 +1,4 @@
-package com.example.kamil.postsapp.viewmodel;
+package com.example.kamil.postsapp.oldVersion.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
