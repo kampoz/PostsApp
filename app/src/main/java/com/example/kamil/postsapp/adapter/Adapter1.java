@@ -1,6 +1,5 @@
 package com.example.kamil.postsapp.adapter;
 
-import android.net.sip.SipSession;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import com.example.kamil.postsapp.model.Post;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostsAdapter extends RecyclerView.Adapter {
+public class Adapter1 extends RecyclerView.Adapter {
 
     private List<Post> posts = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -26,12 +25,12 @@ public class PostsAdapter extends RecyclerView.Adapter {
 
         public PostViewHolder(View vItem) {
             super(vItem);
-            tvTitle = vItem.findViewById(R.id.post_title);
-            tvContent = vItem.findViewById(R.id.post_content);
+            tvTitle = vItem.findViewById(R.id.tv_post_title);
+            tvContent = vItem.findViewById(R.id.tv_post_body);
         }
     }
 
-    public PostsAdapter(List<Post> posts, RecyclerView recyclerView, Listener listener) {
+    public Adapter1(List<Post> posts, RecyclerView recyclerView, Listener listener) {
         this.posts = posts;
         this.recyclerView = recyclerView;
         this.listener = listener;

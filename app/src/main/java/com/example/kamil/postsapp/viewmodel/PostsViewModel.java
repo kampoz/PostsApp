@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.example.kamil.postsapp.model.Post;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PostsViewModel extends ViewModel {

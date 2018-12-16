@@ -9,10 +9,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.kamil.postsapp.R;
-import com.example.kamil.postsapp.adapter.PostsAdapter;
-import com.example.kamil.postsapp.databinding.ActivityMainBinding;
+import com.example.kamil.postsapp.adapter.Adapter1;
 import com.example.kamil.postsapp.model.Post;
-import com.example.kamil.postsapp.network.ApiManager;
+import com.example.kamil.postsapp.remote.ApiManager;
 import com.example.kamil.postsapp.viewmodel.PostsViewModel;
 
 import java.util.ArrayList;
@@ -21,15 +20,16 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import com.example.kamil.postsapp.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity implements PostsAdapter.Listener {
+public class MainActivity extends AppCompatActivity implements Adapter1.Listener {
 
     private static final String TAG = "TAG1";
     private List<Post> posts = new ArrayList<>();
     private Disposable disposable;
 
     private PostsViewModel postsViewModel;
-    private PostsAdapter adapter;
+    private Adapter1 adapter;
 
 
     @SuppressLint("CheckResult")
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements PostsAdapter.List
                     posts.addAll(response);
                     postsViewModel.getPosts().setValue(posts);
 
-                    recyclerView.setAdapter(new PostsAdapter(postsViewModel.getPosts().getValue(), recyclerView, this));
+                    recyclerView.setAdapter(new Adapter1(postsViewModel.getPosts().getValue(), recyclerView, this));
                     disposable.dispose();
                 });
     }

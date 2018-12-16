@@ -1,4 +1,4 @@
-package com.example.kamil.postsapp.network;
+package com.example.kamil.postsapp.remote;
 
 import com.example.kamil.postsapp.model.Comment;
 import com.example.kamil.postsapp.model.Post;
@@ -9,11 +9,9 @@ import io.reactivex.Observable;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
-import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.POST;
 
 public class ApiManager {
     private static final String BASE_URL = "https://jsonplaceholder.typicode.com";

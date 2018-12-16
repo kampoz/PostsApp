@@ -9,6 +9,13 @@ public class Post {
 
     private String userId;
 
+    public Post(String id, String body, String title, String userId) {
+        this.id = id;
+        this.body = body;
+        this.title = title;
+        this.userId = userId;
+    }
+
     public String getId ()
     {
         return id;

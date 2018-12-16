@@ -13,11 +13,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.kamil.postsapp.R;
-import com.example.kamil.postsapp.adapter.PostsAdapter;
 import com.example.kamil.postsapp.model.Comment;
 import com.example.kamil.postsapp.model.Post;
 import com.example.kamil.postsapp.model.User;
-import com.example.kamil.postsapp.network.ApiManager;
+import com.example.kamil.postsapp.remote.ApiManager;
 import com.example.kamil.postsapp.viewmodel.UserViewModel;
 
 import java.util.ArrayList;
@@ -25,7 +24,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class PostFragment extends Fragment {
