@@ -13,8 +13,7 @@ public class PostViewModel extends ViewModel {
     private String title;
     private String userId;
 
-    public MutableLiveData<ArrayList<PostViewModel>> arrayListMutableLiveData = new MutableLiveData<>();
-    private ArrayList<PostViewModel> postsArrayList;
+    public static MutableLiveData<ArrayList<PostViewModel>> arrayListMutableLiveData = new MutableLiveData<>();
 
     public PostViewModel() {
     }
@@ -32,12 +31,6 @@ public class PostViewModel extends ViewModel {
     }
 
     public MutableLiveData<ArrayList<PostViewModel>> getArrayListMutableLiveData() {
-        postsArrayList = new ArrayList<>();
-//        Post post = new Post("1", "BOdy 1", "Title 1", "111");
-//        PostViewModel postViewModel = new PostViewModel(post);
-//        postsArrayList.add(postViewModel);
-        arrayListMutableLiveData.setValue(postsArrayList);
-
         return arrayListMutableLiveData;
     }
 

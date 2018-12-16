@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.example.kamil.postsapp.R;
 import com.example.kamil.postsapp.adapter.Adapter1;
@@ -24,7 +25,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class Main2Activity extends AppCompatActivity {
-
     private PostViewModel postViewModel;
     private RecyclerView recyclerView;
     private Adapter2 adapter2;
@@ -52,11 +52,14 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
+        fab.setOnClickListener(v -> requestForAllPosts());
+    }
+
+    private void requestForAllPosts() {
         disposable = apiManager.getAllPosts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    List<Post> posts = new ArrayList<>(response);
                     ArrayList<PostViewModel> responseListPostViewModel = new ArrayList<>();
                     for (Post post : response) {
                         responseListPostViewModel.add(new PostViewModel(post));
@@ -64,8 +67,6 @@ public class Main2Activity extends AppCompatActivity {
                     postViewModel.getArrayListMutableLiveData().setValue(responseListPostViewModel);
                     disposable.dispose();
                 }, error -> error.printStackTrace());
-
-
     }
-    
+
 }
