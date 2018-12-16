@@ -15,6 +15,7 @@ import com.example.kamil.postsapp.adapter.Adapter1;
 import com.example.kamil.postsapp.adapter.Adapter2;
 import com.example.kamil.postsapp.model.Post;
 import com.example.kamil.postsapp.remote.ApiManager;
+import com.example.kamil.postsapp.remote.Repository;
 import com.example.kamil.postsapp.viewmodel.PostViewModel;
 
 import java.util.ArrayList;
@@ -28,10 +29,8 @@ public class Main2Activity extends AppCompatActivity {
     private PostViewModel postViewModel;
     private RecyclerView recyclerView;
     private Adapter2 adapter2;
-    private Disposable disposable;
-    ApiManager apiManager = new ApiManager();
-    ArrayList<PostViewModel> postViewModels;
     FloatingActionButton fab;
+    Repository repository = new Repository();
 
 
     @Override
@@ -56,17 +55,6 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     private void requestForAllPosts() {
-        disposable = apiManager.getAllPosts()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(response -> {
-                    ArrayList<PostViewModel> responseListPostViewModel = new ArrayList<>();
-                    for (Post post : response) {
-                        responseListPostViewModel.add(new PostViewModel(post));
-                    }
-                    postViewModel.getArrayListMutableLiveData().setValue(responseListPostViewModel);
-                    disposable.dispose();
-                }, error -> error.printStackTrace());
+        repository.getAllPosts(this);
     }
-
 }
