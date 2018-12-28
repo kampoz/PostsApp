@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PostsApp</string>
+    <string name="hello_world">HELLO WORLD!</string>
 </resources>

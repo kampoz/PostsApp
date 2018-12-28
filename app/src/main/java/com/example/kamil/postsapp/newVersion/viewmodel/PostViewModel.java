@@ -11,7 +11,7 @@ public class PostViewModel extends ViewModel {
     private String id;
     private String body;
     private String title;
-    private String userId;
+    public String userId;
 
     public MutableLiveData<ArrayList<PostViewModel>> arrayListMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<PostViewModel> postMutableLiveData = new MutableLiveData<>();
@@ -39,6 +39,10 @@ public class PostViewModel extends ViewModel {
         return postMutableLiveData;
     }
 
+    public void setPostMutableLiveData(MutableLiveData<PostViewModel> postMutableLiveData) {
+        this.postMutableLiveData = postMutableLiveData;
+    }
+
     public String getId() {
         return id;
     }
@@ -53,5 +57,9 @@ public class PostViewModel extends ViewModel {
 
     public String getUserId() {
         return userId;
+    }
+
+    public Object checkMethodForTest() {
+        return true;
     }
 }
